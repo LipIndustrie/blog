@@ -1,0 +1,36 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE } from '../../consts';
+
+const description =
+	'Precision machining, turning, milling and EDM in Besançon, France. Tips, expertise and news from the world of precision mechanics.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={description} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>The LIP Industrie Précision blog</h1>
+			<p>
+				Welcome to the blog of <a href="https://www.lip-industrie.com/en/">LIP Industrie Précision</a
+				>, a general and precision machining workshop based in Besançon, France. For over 30 years we
+				have machined parts for the most demanding sectors: medical, aerospace, space, automotive,
+				defence and many more.
+			</p>
+			<p>
+				Here you will find our advice, our expertise and our news around precision machining: CNC
+				turning and milling, grinding, EDM and quality control.
+			</p>
+			<p>
+				<a href="/en/articles">Browse the articles →</a>
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>

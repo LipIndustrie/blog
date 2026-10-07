@@ -1,0 +1,41 @@
+---
+title: "Convertisseur d'angles : degrés, radians, grades"
+description: "Outil gratuit pour convertir instantanément un angle entre degrés, radians, grades et minutes/secondes d'arc. En ligne, sans inscription."
+pubDate: 'Oct 06 2026'
+heroImage: '../../../assets/photos/outils/outil-1616.webp'
+heroAlt: "Atelier d'électroérosion fil de LIP Industrie Précision à Besançon : machine +GF+ AgieCharmilles CUT F 350 et poste de programmation"
+lang: 'fr'
+---
+
+Convertissez un angle entre **degrés**, **radians**, **grades** (gons) et **degrés-minutes-secondes**
+(DMS). Saisissez une valeur dans l'un des champs : les autres se mettent à jour automatiquement.
+
+<div class="angle-converter">
+	<label>Degrés (°)<input type="number" step="any" data-angle="deg" /></label>
+	<label>Radians (rad)<input type="number" step="any" data-angle="rad" /></label>
+	<label>Grades (gon)<input type="number" step="any" data-angle="gon" /></label>
+	<div class="dms-group">
+		<span class="dms-label">Degrés, minutes, secondes (° ′ ″)</span>
+		<div class="dms-fields">
+			<input type="number" step="any" data-dms="d" aria-label="Degrés" placeholder="°" />
+			<input type="number" step="any" data-dms="m" aria-label="Minutes d'arc" placeholder="′" />
+			<input type="number" step="any" data-dms="s" aria-label="Secondes d'arc" placeholder="″" />
+		</div>
+	</div>
+</div>
+
+<script is:inline src="/tools/angle-converter.js"></script>
+
+## Rappels utiles
+
+- Un tour complet vaut **360°**, soit **2π radians** (≈ 6,2832) ou **400 grades**.
+- Le **grade** (ou gon) divise le quart de cercle en 100 parties : 90° = 100 gon. Il est surtout
+  utilisé en topographie.
+- Le **radian** est l'unité du Système international ; 1 rad ≈ 57,2958°.
+- En **DMS**, 1° = 60 minutes d'arc (′) et 1′ = 60 secondes d'arc (″). Exemple : 12,5° = 12° 30′ 0″.
+
+---
+
+Besoin d'usiner une pièce avec des angles précis ? L'atelier
+[LIP Industrie Précision](https://www.lip-industrie.com/) maîtrise le fraisage 5 axes et le contrôle
+tridimensionnel. [Demandez un devis](https://www.lip-industrie.com/nous-contacter/).

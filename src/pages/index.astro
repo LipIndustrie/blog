@@ -1,48 +1,232 @@
 ---
+import { Image } from 'astro:assets';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getArticlesByLang, getArticleUrl, getToolsByLang, getToolUrl } from '../i18n/posts';
+import imgArticles from '../assets/photos/home/home-1616.webp';
+import imgOutils from '../assets/photos/home/home-1830.webp';
+
+const recentPosts = (await getArticlesByLang('fr')).slice(0, 3);
+const recentTools = (await getToolsByLang('fr')).slice(0, 2);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				max-width: 960px;
+				margin: 0 auto;
+				padding: 2em 1em 4em;
+			}
+
+			/* --- Grille de cartes --- */
+			.cards {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 1.25rem;
+				margin-bottom: 3rem;
+			}
+
+			/* Carte générique */
+			.card {
+				display: flex;
+				flex-direction: column;
+				border-radius: 14px;
+				overflow: hidden;
+				box-shadow: var(--box-shadow);
+				text-decoration: none;
+				color: inherit;
+				transition: transform 0.18s ease, box-shadow 0.18s ease;
+				background: #fff;
+			}
+			.card:hover {
+				transform: translateY(-3px);
+				box-shadow: 0 6px 20px rgba(var(--gray), 35%), 0 16px 40px rgba(var(--gray), 20%);
+			}
+
+			/* Cartes de navigation (Articles / Outils) */
+			.card-nav {
+				position: relative;
+				min-height: 200px;
+				justify-content: flex-end;
+				color: #fff;
+			}
+			.card-nav img {
+				position: absolute;
+				inset: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+			}
+			.card-nav .card-overlay {
+				position: relative;
+				z-index: 1;
+				width: 100%;
+				padding: 1.25rem 1.5rem;
+				background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%);
+				display: flex;
+				flex-direction: column;
+				gap: 0.2rem;
+			}
+			.card-nav .card-title {
+				font-size: 1.35rem;
+				font-weight: 700;
+				margin: 0;
+			}
+			.card-nav .card-sub {
+				font-size: 0.82rem;
+				opacity: 0.88;
+				margin: 0;
+			}
+
+			/* Cartes article récent */
+			.card-article img {
+				width: 100%;
+				height: 180px;
+				object-fit: cover;
+				display: block;
+				border-radius: 0;
+			}
+			.card-article .card-body {
+				padding: 1rem 1.25rem 1.25rem;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				gap: 0.25rem;
+			}
+			.card-article .card-label {
+				font-size: 0.72rem;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				color: var(--accent);
+			}
+			.card-article .card-label.label-outil {
+				color: #b45309;
+			}
+			.card-article .card-title {
+				font-size: 1rem;
+				font-weight: 700;
+				color: rgb(var(--black));
+				margin: 0;
+				line-height: 1.3;
+			}
+			.card-article .card-date {
+				font-size: 0.8rem;
+				color: rgb(var(--gray));
+				margin-top: auto;
+				padding-top: 0.5rem;
+			}
+
+			/* --- Contenu éditorial --- */
+			.intro {
+				border-top: 1px solid rgb(var(--gray-light));
+				padding-top: 2rem;
+				max-width: 680px;
+			}
+			.intro h1 {
+				font-size: 1.563rem;
+				margin-bottom: 0.75rem;
+			}
+			.intro p {
+				color: rgb(var(--gray-dark));
+				margin-bottom: 1em;
+			}
+			.intro a {
+				color: var(--accent);
+			}
+
+			@media (max-width: 640px) {
+				.cards {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your{' '}
-				<code>astro.config.mjs</code> file. You can customize your setup with{' '}
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to{' '}
-				<a href="https://docs.astro.build/">read the docs</a>{' '}
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out{' '}
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>{' '}
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<div class="cards">
+				<!-- Carte Articles -->
+				<a href="/articles" class="card card-nav">
+					<Image width={480} height={200} src={imgArticles} alt="Atelier électroérosion LIP Industrie Précision" />
+					<div class="card-overlay">
+						<p class="card-title">Articles</p>
+						<p class="card-sub">Conseils, procédés et savoir-faire usinage</p>
+					</div>
+				</a>
+
+				<!-- Carte Outils -->
+				<a href="/outils" class="card card-nav">
+					<Image width={480} height={200} src={imgOutils} alt="Pièces usinées en électroérosion fil LIP Industrie Précision" />
+					<div class="card-overlay">
+						<p class="card-title">Outils</p>
+						<p class="card-sub">Convertisseurs et aides au calcul gratuits</p>
+					</div>
+				</a>
+
+				<!-- Articles récents -->
+				{recentPosts.map((post) => (
+					<a href={getArticleUrl(post)} class="card card-article">
+						{post.data.heroImage && (
+							<Image
+								width={480}
+								height={180}
+								src={post.data.heroImage}
+								alt={post.data.heroAlt ?? post.data.title}
+							/>
+						)}
+						<div class="card-body">
+							<span class="card-label">Actualité</span>
+							<h2 class="card-title">{post.data.title}</h2>
+							<p class="card-date"><FormattedDate date={post.data.pubDate} /></p>
+						</div>
+					</a>
+				))}
+
+				<!-- Outils récents -->
+				{recentTools.map((tool) => (
+					<a href={getToolUrl(tool)} class="card card-article">
+						{tool.data.heroImage && (
+							<Image
+								width={480}
+								height={180}
+								src={tool.data.heroImage}
+								alt={tool.data.heroAlt ?? tool.data.title}
+							/>
+						)}
+						<div class="card-body">
+							<span class="card-label label-outil">Outil</span>
+							<h2 class="card-title">{tool.data.title}</h2>
+							<p class="card-date"><FormattedDate date={tool.data.pubDate} /></p>
+						</div>
+					</a>
+				))}
+			</div>
+
+			<!-- Contenu éditorial existant -->
+			<div class="intro">
+				<h1>Le blog de LIP Industrie Précision</h1>
+				<p>
+					Bienvenue sur le blog de <a href="https://www.lip-industrie.com/">LIP Industrie Précision</a>,
+					atelier de mécanique générale et de précision basé à Besançon. Depuis plus de 30 ans, nous
+					usinons des pièces pour les secteurs les plus exigeants : médical, aéronautique, spatial,
+					automobile, armement et bien d'autres.
+				</p>
+				<p>
+					Vous trouverez ici nos conseils, notre savoir-faire et nos actualités autour de l'usinage de
+					précision : tournage et fraisage CNC, rectification, électroérosion et contrôle qualité.
+				</p>
+				<p>
+					<a href="/articles">Parcourir les articles →</a>
+				</p>
+			</div>
 		</main>
 		<Footer />
 	</body>

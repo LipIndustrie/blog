@@ -1,12 +1,17 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
-type Props = HTMLAttributes<'a'>;
+type Props = HTMLAttributes<'a'> & { active?: boolean };
 
-const { href, class: className, ...props } = Astro.props;
-const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
-const subpath = pathname.match(/[^\/]+/g);
-const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
+const { href, class: className, active, ...props } = Astro.props;
+// Normalise les chemins (retire le trailing slash) pour comparer la route
+// courante au lien, en gardant le préfixe de langue éventuel (/en/...).
+const normalize = (p: string) => (p !== '/' && p.endsWith('/') ? p.slice(0, -1) : p);
+const current = normalize(Astro.url.pathname);
+const target = normalize(String(href));
+// `active` explicite (ex. détection de section) sinon comparaison de chemin.
+const isActive =
+	active ?? (current === target || (target !== '/' && current.startsWith(target + '/')));
 ---
 
 <a href={href} class:list={[className, { active: isActive }]} {...props}>

@@ -6,7 +6,14 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
+	site: 'https://blog.lip-industrie.com',
+	i18n: {
+		defaultLocale: 'fr',
+		locales: ['fr', 'en'],
+		routing: {
+			prefixDefaultLocale: false,
+		},
+	},
 	integrations: [mdx(), sitemap()],
 	fonts: [
 		{

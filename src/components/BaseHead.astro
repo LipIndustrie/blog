@@ -6,6 +6,7 @@ import type { ImageMetadata } from 'astro';
 import FallbackImage from '../assets/blog-placeholder-1.jpg';
 import { SITE_TITLE } from '../consts';
 import { Font } from 'astro:assets';
+import { getLangFromUrl, getAlternatePath } from '../i18n/utils';
 
 interface Props {
 	title: string;
@@ -16,6 +17,10 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = FallbackImage } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const frHref = new URL(getAlternatePath(Astro.url, 'fr'), Astro.site);
+const enHref = new URL(getAlternatePath(Astro.url, 'en'), Astro.site);
 ---
 
 <!-- Global Metadata -->
@@ -36,6 +41,12 @@ const { title, description, image = FallbackImage } = Astro.props;
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
+
+<!-- Alternates hreflang (FR par défaut, EN sous /en/) -->
+<link rel="alternate" hreflang="fr" href={frHref} />
+<link rel="alternate" hreflang="en" href={enHref} />
+<link rel="alternate" hreflang="x-default" href={frHref} />
+<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'fr_FR'} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

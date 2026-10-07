@@ -1,0 +1,88 @@
+---
+// Liens de contact et réseaux de LIP Industrie (LinkedIn, site principal, email, téléphone).
+// Réutilisé dans le Header et le Footer. Les URLs viennent de consts.ts (COMPANY).
+import { COMPANY } from '../consts';
+
+const links = [
+	{
+		href: COMPANY.linkedin,
+		label: 'LinkedIn LIP Industrie',
+		external: true,
+		// Icône LinkedIn
+		path: 'M13.632 13.635h-2.37V9.922c0-.886-.018-2.025-1.234-2.025-1.235 0-1.424.964-1.424 1.96v3.778h-2.37V6H8.51v1.04h.03c.318-.6 1.093-1.233 2.25-1.233 2.4 0 2.843 1.58 2.843 3.637v4.19zM3.558 4.955a1.376 1.376 0 1 1 0-2.751 1.376 1.376 0 0 1 0 2.751zm1.188 8.68H2.369V6h2.377v7.635zM14.816 0H1.18C.528 0 0 .516 0 1.153v13.694C0 15.483.528 16 1.18 16h13.635c.652 0 1.185-.517 1.185-1.153V1.153C16 .516 15.467 0 14.815 0z',
+	},
+	{
+		href: COMPANY.mainSite,
+		label: 'Site principal lip-industrie.com',
+		external: true,
+		// Icône globe
+		path: 'M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM4.5 7.5a3.5 3.5 0 0 1 .1-.8h2.9v1.6H4.6a3.5 3.5 0 0 1-.1-.8zm6.3-.8h2.9a3.6 3.6 0 0 1 0 1.6h-2.9V6.7zm2.4-1.6h-2.6a7 7 0 0 0-.8-2.1 6.5 6.5 0 0 1 3.4 2.1zM8 1.5c.5 0 1.3 1 1.7 2.9H6.3C6.7 2.5 7.5 1.5 8 1.5zM5.3 3a7 7 0 0 0-.8 2.1H1.9A6.5 6.5 0 0 1 5.3 3zM1.9 10.9h2.6a7 7 0 0 0 .8 2.1 6.5 6.5 0 0 1-3.4-2.1zm3.7 0h3.4C8.6 12.9 8 13.9 8 13.9s-1.3-1-1.7-2.9H5.6zm5.2 2.1a7 7 0 0 0 .8-2.1h2.6a6.5 6.5 0 0 1-3.4 2.1z',
+	},
+	{
+		href: `mailto:${COMPANY.email}`,
+		label: `Envoyer un email à ${COMPANY.name}`,
+		external: false,
+		// Icône enveloppe
+		path: 'M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-.5a.5.5 0 0 0-.5.5v.41l6.5 3.9 6.5-3.9V4a.5.5 0 0 0-.5-.5H2zm12.5 2.3-4.37 2.62 4.37 2.69V5.8zm-.03 6.2-4.84-2.98L8 10.6l-1.63-.98L1.53 12.6a.5.5 0 0 0 .47.4h12a.5.5 0 0 0 .47-.4zM1.5 11.3l4.37-2.69L1.5 5.99v5.3z',
+	},
+	{
+		href: COMPANY.phoneHref,
+		label: `Appeler ${COMPANY.name} au ${COMPANY.phone}`,
+		external: false,
+		// Icône téléphone
+		path: 'M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.795a.678.678 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z',
+	},
+];
+
+interface Props {
+	variant?: 'header' | 'footer';
+}
+const { variant = 'footer' } = Astro.props;
+---
+
+<div class:list={['social-links', variant]}>
+	{
+		links.map((link) => (
+			<a
+				href={link.href}
+				aria-label={link.label}
+				title={link.label}
+				{...link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+			>
+				<svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24">
+					<path fill="currentColor" d={link.path} />
+				</svg>
+			</a>
+		))
+	}
+</div>
+
+<style>
+	.social-links {
+		display: flex;
+		gap: 0.75em;
+	}
+	.social-links a {
+		display: flex;
+		align-items: center;
+		color: rgb(var(--gray));
+		transition: color 0.2s ease;
+	}
+	.social-links a:hover {
+		color: var(--accent);
+	}
+	/* Dans le footer : centré, teinte gris foncé au survol. */
+	.social-links.footer {
+		justify-content: center;
+		gap: 1em;
+		margin-top: 1em;
+	}
+	.social-links.footer a:hover {
+		color: rgb(var(--gray-dark));
+	}
+	@media (max-width: 720px) {
+		.social-links.header {
+			display: none;
+		}
+	}
+</style>

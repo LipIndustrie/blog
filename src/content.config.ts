@@ -2,19 +2,33 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-const blog = defineCollection({
-	// Load Markdown and MDX files in the `src/content/blog/` directory.
-	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
-	// Type-check frontmatter using a schema
-	schema: ({ image }) =>
-		z.object({
-			title: z.string(),
-			description: z.string(),
-			// Transform string to Date object
-			pubDate: z.coerce.date(),
-			updatedDate: z.coerce.date().optional(),
-			heroImage: z.optional(image()),
-		}),
+// Schéma commun aux articles et aux outils : même frontmatter.
+// La langue est optionnelle (déduite du dossier fr/ ou en/ si absente).
+const contentSchema = ({ image }: { image: () => z.ZodType }) =>
+	z.object({
+		title: z.string(),
+		description: z.string(),
+		// Transform string to Date object
+		pubDate: z.coerce.date(),
+		updatedDate: z.coerce.date().optional(),
+		heroImage: z.optional(image()),
+		// Texte alternatif de l'image hero (SEO image + accessibilité).
+		// Si absent, on retombe sur le titre de l'article.
+		heroAlt: z.string().optional(),
+		lang: z.enum(['fr', 'en']).optional(),
+	});
+
+// Articles de blog : src/content/articles/<lang>/
+const articles = defineCollection({
+	loader: glob({ base: './src/content/articles', pattern: '**/*.{md,mdx}' }),
+	schema: contentSchema,
 });
 
-export const collections = { blog };
+// Outils gratuits en ligne (convertisseurs, tableaux de normes…) :
+// src/content/tools/<lang>/
+const tools = defineCollection({
+	loader: glob({ base: './src/content/tools', pattern: '**/*.{md,mdx}' }),
+	schema: contentSchema,
+});
+
+export const collections = { articles, tools };

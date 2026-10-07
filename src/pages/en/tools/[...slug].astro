@@ -1,0 +1,21 @@
+---
+import { type CollectionEntry, render } from 'astro:content';
+import ContentPost from '../../../layouts/BlogPost.astro';
+import { getToolsByLang, getEntrySlug } from '../../../i18n/posts';
+
+export async function getStaticPaths() {
+	const tools = await getToolsByLang('en');
+	return tools.map((tool) => ({
+		params: { slug: getEntrySlug(tool) },
+		props: tool,
+	}));
+}
+type Props = CollectionEntry<'tools'>;
+
+const tool = Astro.props;
+const { Content } = await render(tool);
+---
+
+<ContentPost {...tool.data}>
+	<Content />
+</ContentPost>

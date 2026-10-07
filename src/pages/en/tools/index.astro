@@ -1,0 +1,76 @@
+---
+import BaseHead from '../../../components/BaseHead.astro';
+import Footer from '../../../components/Footer.astro';
+import Header from '../../../components/Header.astro';
+import { SITE_TITLE } from '../../../consts';
+import { getToolsByLang, getToolUrl } from '../../../i18n/posts';
+import { useTranslations } from '../../../i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+const tools = await getToolsByLang(lang);
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<BaseHead title={`${t('tools.title')} | ${SITE_TITLE}`} description={t('tools.intro')} />
+		<style>
+			main {
+				width: 720px;
+				max-width: calc(100% - 2em);
+			}
+			ul {
+				list-style: none;
+				margin: 2rem 0 0;
+				padding: 0;
+			}
+			li {
+				margin-bottom: 1.5rem;
+				padding-bottom: 1.5rem;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			li a {
+				text-decoration: none;
+			}
+			.tool-title {
+				margin: 0 0 0.25rem;
+				color: rgb(var(--black));
+			}
+			.tool-desc {
+				margin: 0;
+				color: rgb(var(--gray-dark));
+			}
+			li a:hover .tool-title {
+				color: rgb(var(--accent));
+			}
+			.empty {
+				color: rgb(var(--gray));
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>{t('tools.title')}</h1>
+			<p>{t('tools.intro')}</p>
+			{
+				tools.length === 0 ? (
+					<p class="empty">Coming soon.</p>
+				) : (
+					<ul>
+						{tools.map((tool) => (
+							<li>
+								<a href={getToolUrl(tool)}>
+									<h2 class="tool-title">{tool.data.title}</h2>
+									<p class="tool-desc">{tool.data.description}</p>
+								</a>
+							</li>
+						))}
+					</ul>
+				)
+			}
+		</main>
+		<Footer />
+	</body>
+</html>
