@@ -121,6 +121,30 @@ hr {
 		padding: 1em;
 	}
 }
+@media (max-width: 480px) {
+	body {
+		font-size: 16px;
+	}
+	main {
+		padding: 0.75em;
+	}
+	h1 {
+		font-size: 2em;
+	}
+	h2 {
+		font-size: 1.6em;
+	}
+	h3 {
+		font-size: 1.3em;
+	}
+	blockquote {
+		padding-left: 12px;
+		font-size: 1.1em;
+	}
+	.angle-converter .dms-fields {
+		grid-template-columns: 1fr;
+	}
+}
 
 .sr-only {
 	border: 0;

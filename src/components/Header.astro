@@ -21,13 +21,18 @@ const altHref = getAlternatePath(Astro.url, altLang);
 ---
 
 <header>
-	<nav>
+	<nav id="main-nav">
 		<a href={homeHref} class="logo-link">
 			<img src="/logo-lip-vert.png" alt="LIP Industrie" height="40" width="36" />
-			<span class="logo-text">LIP Industrie</span>
+			<div class="logo-text">
+				<span class="logo-name">LIP Industrie</span>
+				<span class="logo-sub">Le blog</span>
+			</div>
 		</a>
-		<div class="internal-links">
-			<HeaderLink href={localizePath('/', lang)}>{t('nav.home')}</HeaderLink>
+		<button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+			<span></span><span></span><span></span>
+		</button>
+		<div class="internal-links" id="nav-links">
 			<HeaderLink href={getSectionPath('articles', lang)} active={section === 'articles'}>
 				{t('nav.articles')}
 			</HeaderLink>
@@ -42,12 +47,25 @@ const altHref = getAlternatePath(Astro.url, altLang);
 		<SocialLinks variant="header" />
 	</nav>
 </header>
+
+<script>
+	const btn = document.querySelector('.hamburger') as HTMLButtonElement;
+	const nav = document.getElementById('main-nav');
+	btn?.addEventListener('click', () => {
+		const open = nav?.classList.toggle('nav-open');
+		btn.setAttribute('aria-expanded', String(open));
+	});
+</script>
+
 <style>
 	header {
 		margin: 0;
 		padding: 0 1em;
 		background: white;
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+		position: sticky;
+		top: 0;
+		z-index: 100;
 	}
 	.logo-link {
 		display: flex;
@@ -55,20 +73,33 @@ const altHref = getAlternatePath(Astro.url, altLang);
 		gap: 0.5em;
 		padding: 0.5em 0;
 		text-decoration: none;
+		flex-shrink: 0;
 	}
 	.logo-link img {
 		display: block;
 	}
 	.logo-text {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		line-height: 1.15;
+	}
+	.logo-name {
 		font-size: 0.85em;
 		font-weight: 700;
 		color: var(--accent);
-		line-height: 1.1;
+	}
+	.logo-sub {
+		font-size: 0.7em;
+		font-weight: 400;
+		color: rgb(var(--gray));
 	}
 	nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 0;
 	}
 	nav a {
 		padding: 1em 0.5em;
@@ -80,6 +111,10 @@ const altHref = getAlternatePath(Astro.url, altLang);
 		text-decoration: none;
 		border-bottom-color: var(--accent);
 	}
+	.internal-links {
+		display: flex;
+		align-items: center;
+	}
 	.lang-switch {
 		display: inline-flex;
 		align-items: center;
@@ -88,5 +123,68 @@ const altHref = getAlternatePath(Astro.url, altLang);
 	.flag {
 		font-size: 1.1em;
 		line-height: 1;
+	}
+
+	/* Hamburger — caché sur desktop */
+	.hamburger {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+		gap: 5px;
+		width: 36px;
+		height: 36px;
+		padding: 6px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		border-radius: 6px;
+	}
+	.hamburger span {
+		display: block;
+		height: 2px;
+		background: rgb(var(--black));
+		border-radius: 2px;
+		transition: transform 0.2s, opacity 0.2s;
+	}
+	.hamburger:hover {
+		background: rgb(var(--gray-light));
+	}
+
+	/* Mobile */
+	@media (max-width: 640px) {
+		.hamburger {
+			display: flex;
+		}
+		.internal-links {
+			display: none;
+			width: 100%;
+			flex-direction: column;
+			align-items: flex-start;
+			padding: 0.5em 0 1em;
+			border-top: 1px solid rgb(var(--gray-light));
+		}
+		.internal-links a {
+			padding: 0.75em 0.25em;
+			width: 100%;
+			border-bottom: none;
+		}
+		.internal-links a.active {
+			border-bottom: none;
+			color: var(--accent);
+			font-weight: 700;
+		}
+		nav.nav-open .internal-links {
+			display: flex;
+		}
+		/* Croix quand ouvert */
+		nav.nav-open .hamburger span:nth-child(1) {
+			transform: translateY(7px) rotate(45deg);
+		}
+		nav.nav-open .hamburger span:nth-child(2) {
+			opacity: 0;
+		}
+		nav.nav-open .hamburger span:nth-child(3) {
+			transform: translateY(-7px) rotate(-45deg);
+		}
 	}
 </style>

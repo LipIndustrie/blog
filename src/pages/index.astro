@@ -147,6 +147,20 @@ const recentTools = (await getToolsByLang('fr')).slice(0, 2);
 					grid-template-columns: 1fr;
 				}
 			}
+			@media (max-width: 480px) {
+				.cards {
+					gap: 0.75rem;
+				}
+				.card-nav {
+					min-height: 160px;
+				}
+				.card-nav .card-overlay {
+					padding: 0.75rem 1rem;
+				}
+				.card-article img {
+					height: 140px;
+				}
+			}
 		</style>
 	</head>
 	<body>

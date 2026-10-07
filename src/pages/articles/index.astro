@@ -17,7 +17,8 @@ const posts = await getArticlesByLang(lang);
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
 			main {
-				width: 960px;
+				width: 100%;
+				max-width: 960px;
 			}
 			ul {
 				display: flex;
@@ -81,6 +82,11 @@ const posts = await getArticlesByLang(lang);
 				}
 				ul li:first-child .title {
 					font-size: 1.563em;
+				}
+			}
+			@media (max-width: 480px) {
+				ul {
+					gap: 0.35em;
 				}
 			}
 		</style>
