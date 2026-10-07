@@ -19,6 +19,7 @@ const recentTools = (await getToolsByLang('fr')).slice(0, 2);
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
 			main {
+				width: calc(100% - 2em);
 				max-width: 960px;
 				margin: 0 auto;
 				padding: 2em 1em 4em;
