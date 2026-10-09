@@ -19,6 +19,30 @@ const heroAltText = heroAlt ?? title;
 <html lang={lang}>
 	<head>
 		<BaseHead title={title} description={description} />
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "BlogPosting",
+			"headline": title,
+			"description": description,
+			"datePublished": pubDate.toISOString(),
+			...(updatedDate ? { "dateModified": updatedDate.toISOString() } : {}),
+			"author": {
+				"@type": "Organization",
+				"name": lang === 'en' ? "LIP Industrie Editorial Team" : "Rédaction LIP Industrie",
+				"url": "https://www.lip-industrie.com/"
+			},
+			"publisher": {
+				"@type": "Organization",
+				"name": "LIP Industrie Précision",
+				"url": "https://www.lip-industrie.com/",
+				"logo": {
+					"@type": "ImageObject",
+					"url": new URL('/logo-lip-vert.png', Astro.site).toString()
+				}
+			},
+			"inLanguage": lang === 'en' ? "en" : "fr",
+			"url": new URL(Astro.url.pathname, Astro.site).toString()
+		})} />
 		<style>
 			main {
 				width: calc(100% - 2em);
@@ -71,6 +95,26 @@ const heroAltText = heroAlt ?? title;
 			.last-updated-on {
 				font-style: italic;
 			}
+			.author-byline {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				justify-content: center;
+				margin-top: 0.6em;
+				font-size: 0.85em;
+				color: rgb(var(--gray));
+			}
+			.author-byline img {
+				width: 22px;
+				height: auto;
+				border-radius: 0;
+				box-shadow: none;
+				display: inline;
+			}
+			.author-byline span {
+				font-weight: 600;
+				color: var(--accent);
+			}
 		</style>
 	</head>
 
@@ -98,6 +142,10 @@ const heroAltText = heroAlt ?? title;
 							}
 						</div>
 						<h1>{title}</h1>
+						<div class="author-byline">
+							<img src="/logo-lip-vert.png" alt="LIP Industrie Précision" width="22" height="26" />
+							<span>{lang === 'en' ? 'LIP Industrie Editorial Team' : 'Rédaction LIP Industrie'}</span>
+						</div>
 						<hr />
 					</div>
 					<slot />
