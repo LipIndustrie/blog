@@ -36,11 +36,11 @@ export function getToolUrl(tool: Tool): string {
 	return lang === defaultLang ? `/outils/${slug}/` : `/${lang}/tools/${slug}/`;
 }
 
-/** Articles d'une langue, triés du plus récent au plus ancien. */
+/** Articles d'une langue, triés du plus récent au plus ancien. Exclut les drafts. */
 export async function getArticlesByLang(lang: Lang): Promise<Article[]> {
 	const articles = await getCollection('articles');
 	return articles
-		.filter((a) => getEntryLang(a) === lang)
+		.filter((a) => getEntryLang(a) === lang && !a.data.draft)
 		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 }
 

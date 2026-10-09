@@ -16,6 +16,7 @@ const contentSchema = ({ image }: { image: () => z.ZodType }) =>
 		// Si absent, on retombe sur le titre de l'article.
 		heroAlt: z.string().optional(),
 		lang: z.enum(['fr', 'en']).optional(),
+		draft: z.boolean().optional(),
 	});
 
 // Articles de blog : src/content/articles/<lang>/
