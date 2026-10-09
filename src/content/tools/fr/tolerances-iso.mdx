@@ -1,0 +1,114 @@
+---
+title: "Tableau des tolérances ISO 286-1 — arbres et alésages"
+description: "Outil gratuit : calcul des écarts et limites de tolérances ISO 286-1 pour arbres (a..z) et alésages (A..Z), qualités IT5 à IT12, et tableau des ajustements courants."
+pubDate: 'Oct 09 2026'
+heroImage: '../../../assets/photos/about-2421.webp'
+heroAlt: "Panneau LIP Industrie Précision avec copeaux de fil de cuivre électroérosion devant l'atelier de Besançon"
+lang: 'fr'
+---
+
+Calculez instantanément les **écarts de tolérance** (en µm) et les **limites dimensionnelles** (en mm)
+pour n'importe quel diamètre nominal, selon la norme **ISO 286-1:2010**. Choisissez entre le tableau
+complet d'un arbre ou d'un alésage, ou consultez les ajustements courants recommandés.
+
+<div id="iso-tol">
+
+<div class="tol-section">
+
+## Écarts par position — arbre ou alésage
+
+<div class="tol-controls">
+  <div class="tol-field">
+    <label for="tol-diam">Ø nominal (mm)</label>
+    <input type="number" id="tol-diam" min="1" max="500" step="0.01" placeholder="ex. 25" />
+  </div>
+  <div class="tol-field">
+    <label for="tol-grade">Qualité IT</label>
+    <select id="tol-grade">
+      <option value="5">IT5</option>
+      <option value="6">IT6</option>
+      <option value="7" selected>IT7</option>
+      <option value="8">IT8</option>
+      <option value="9">IT9</option>
+      <option value="10">IT10</option>
+      <option value="11">IT11</option>
+      <option value="12">IT12</option>
+    </select>
+  </div>
+  <div class="tol-field">
+    <span>Type</span>
+    <div class="tol-radios">
+      <label><input type="radio" name="tol-mode" value="shaft" checked /> Arbre</label>
+      <label><input type="radio" name="tol-mode" value="hole" /> Alésage</label>
+    </div>
+  </div>
+  <button class="tol-btn" id="tol-calc-btn">Calculer</button>
+</div>
+
+<div id="tol-output"></div>
+
+</div>
+
+<div class="tol-section">
+
+## Ajustements courants recommandés
+
+Entrez le diamètre nominal et obtenez les jeux ou serrages pour les ajustements ISO les plus utilisés
+(système à alésage normal H).
+
+<div class="tol-controls">
+  <div class="tol-field">
+    <label for="fit-diam">Ø nominal (mm)</label>
+    <input type="number" id="fit-diam" min="1" max="500" step="0.01" placeholder="ex. 25" />
+  </div>
+  <button class="tol-btn" id="fit-calc-btn">Calculer</button>
+</div>
+
+<div id="fit-output"></div>
+
+</div>
+
+</div>
+
+<script is:inline src="/tools/tolerances-iso.js"></script>
+
+## Comment lire le tableau
+
+- **es / ei** : écarts supérieur et inférieur de l'arbre (en µm, algébriques).  
+  *Ø max arbre = Ø nominal + es/1000 ; Ø min arbre = Ø nominal + ei/1000.*
+- **EI / ES** : écarts inférieur et supérieur de l'alésage (en µm, algébriques).  
+  *Ø min alésage = Ø nominal + EI/1000 ; Ø max alésage = Ø nominal + ES/1000.*
+- **IT** : valeur de tolérance (IT = es − ei = ES − EI), en µm.
+- **Jeu max** = ES alésage − ei arbre ; **Jeu min** = EI alésage − es arbre.  
+  Une valeur négative de jeu min indique un **serrage garanti**.
+
+## Rappels ISO 286-1
+
+- La position de la tolérance est définie par la **déviation fondamentale** (lettre) :
+  minuscule pour les arbres (`h`, `f`, `p`…), majuscule pour les alésages (`H`, `F`, `P`…).
+- **h / H** sont les positions de référence (écart nul côté matière) : arbre `h` et alésage `H`
+  sont les bases des systèmes d'ajustement à arbre normal et à alésage normal.
+- La **qualité IT** définit l'amplitude de la zone de tolérance : IT5 (très précis) → IT12 (grossier).
+- Les valeurs calculées sont conformes aux tables de la norme ISO 286-1:2010 pour les diamètres
+  de 1 à 500 mm.
+
+## Ajustements courants — guide de choix rapide
+
+| Ajustement | Usage typique |
+|---|---|
+| H7/f7 | Glissant avec jeu notable — arbre tournant dans palier bronze |
+| H7/g6 | Glissant précis — tige de vérin, queue de foret |
+| H7/h6 | Centrage sans jeu garanti — montage démontable |
+| H7/k6 | Sans jeu / serrage léger — montage précis, centrage répétable |
+| H7/n6 | Serrage léger — montage par presse légère ou chauffage |
+| H7/p6 | Serrage normal — montage permanent par presse |
+| H7/s6 | Serrage fort — montage indémontable, arbre de transmission |
+| H8/f7 | Tournant libre — broche, roulement à billes ordinaire |
+| H11/c11 | Libre — pièces en environnement poussiéreux |
+
+---
+
+Besoin de pièces usinées avec des ajustements serrés ? L'atelier
+[LIP Industrie Précision](https://www.lip-industrie.com/) maîtrise la rectification, le tournage
+CNC de précision et le contrôle tridimensionnel.
+[Demandez un devis](https://www.lip-industrie.com/nous-contacter/).

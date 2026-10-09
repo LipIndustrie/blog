@@ -213,3 +213,125 @@ hr {
 	font-style: italic;
 	color: rgb(var(--gray));
 }
+
+/* Outil tolérances ISO 286-1 */
+#iso-tol {
+	font-size: 0.95em;
+}
+.tol-section {
+	margin: 2rem 0;
+	padding: 1.5rem;
+	border: 1px solid rgb(var(--gray-light));
+	border-radius: 12px;
+	background: rgba(var(--gray-light), 20%);
+}
+.tol-section h2 {
+	margin-top: 0;
+	font-size: 1.2em;
+	color: var(--accent);
+}
+.tol-controls {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	align-items: flex-end;
+	margin-bottom: 1rem;
+}
+.tol-field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.3rem;
+	font-weight: 600;
+	font-size: 0.9em;
+}
+.tol-field input[type="number"],
+.tol-field select {
+	padding: 0.5rem 0.7rem;
+	font-size: 1rem;
+	border: 1px solid rgb(var(--gray));
+	border-radius: 8px;
+	width: 130px;
+}
+.tol-field input[type="number"]:focus,
+.tol-field select:focus {
+	outline: 2px solid var(--accent);
+	border-color: var(--accent);
+}
+.tol-radios {
+	display: flex;
+	gap: 1.2rem;
+	flex-wrap: wrap;
+	font-weight: 600;
+	font-size: 0.9em;
+}
+.tol-radios label {
+	display: flex;
+	align-items: center;
+	gap: 0.35rem;
+	cursor: pointer;
+}
+.tol-btn {
+	padding: 0.55rem 1.4rem;
+	background: var(--accent);
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	font-size: 1rem;
+	font-weight: 700;
+	cursor: pointer;
+	white-space: nowrap;
+}
+.tol-btn:hover {
+	background: var(--accent-dark);
+}
+.tol-table-wrap {
+	overflow-x: auto;
+	margin-top: 1rem;
+}
+.tol-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.88em;
+	white-space: nowrap;
+}
+.tol-table th {
+	background: var(--accent);
+	color: #fff;
+	padding: 0.45rem 0.8rem;
+	text-align: left;
+	font-weight: 700;
+}
+.tol-table td {
+	padding: 0.35rem 0.8rem;
+	border-bottom: 1px solid rgb(var(--gray-light));
+}
+.tol-table tr:nth-child(even) td {
+	background: rgba(var(--gray-light), 30%);
+}
+.tol-table .na {
+	color: rgb(var(--gray));
+	font-style: italic;
+}
+.tol-error {
+	color: #c0392b;
+	font-weight: 600;
+}
+.fit-jeu td { border-left: 3px solid #27ae60; }
+.fit-serrage td { border-left: 3px solid #e74c3c; }
+.fit-indetermine td { border-left: 3px solid #f39c12; }
+.fit-badge {
+	display: inline-block;
+	padding: 0.15rem 0.6rem;
+	border-radius: 20px;
+	font-size: 0.82em;
+	font-weight: 700;
+}
+.fit-badge--jeu { background: #d5f5e3; color: #1e8449; }
+.fit-badge--serrage { background: #fadbd8; color: #c0392b; }
+.fit-badge--indetermine { background: #fdebd0; color: #ca6f1e; }
+
+@media (max-width: 480px) {
+	.tol-controls { flex-direction: column; align-items: stretch; }
+	.tol-field input[type="number"],
+	.tol-field select { width: 100%; }
+}
