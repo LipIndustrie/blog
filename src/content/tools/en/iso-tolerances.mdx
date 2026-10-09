@@ -1,0 +1,112 @@
+---
+title: "ISO 286-1 Tolerance Table — Shafts and Holes"
+description: "Free tool: calculate ISO 286-1 tolerance deviations for shafts (a..z) and holes (A..Z), grades IT5 to IT12, plus a table of common fits with clearance and interference values."
+pubDate: 'Oct 09 2026'
+heroImage: '../../../assets/photos/about-2421.webp'
+heroAlt: "LIP Industrie Précision office in Besançon: company logo and ISO 9001 Bureau Veritas certification"
+lang: 'en'
+---
+
+Calculate **tolerance deviations** (in µm) and **dimensional limits** (in mm) for any nominal
+diameter, according to **ISO 286-1:2010**. Choose between a full shaft or hole deviation table,
+or look up recommended common fits.
+
+<div id="iso-tol">
+
+<div class="tol-section">
+
+## Deviations by position — shaft or hole
+
+<div class="tol-controls">
+  <div class="tol-field">
+    <label for="tol-diam">Nominal Ø (mm)</label>
+    <input type="number" id="tol-diam" min="1" max="500" step="0.01" placeholder="e.g. 25" />
+  </div>
+  <div class="tol-field">
+    <label for="tol-grade">Grade IT</label>
+    <select id="tol-grade">
+      <option value="5">IT5</option>
+      <option value="6">IT6</option>
+      <option value="7" selected>IT7</option>
+      <option value="8">IT8</option>
+      <option value="9">IT9</option>
+      <option value="10">IT10</option>
+      <option value="11">IT11</option>
+      <option value="12">IT12</option>
+    </select>
+  </div>
+  <div class="tol-field">
+    <span>Type</span>
+    <div class="tol-radios">
+      <label><input type="radio" name="tol-mode" value="shaft" checked /> Shaft</label>
+      <label><input type="radio" name="tol-mode" value="hole" /> Hole</label>
+    </div>
+  </div>
+  <button class="tol-btn" id="tol-calc-btn">Calculate</button>
+</div>
+
+<div id="tol-output"></div>
+
+</div>
+
+<div class="tol-section">
+
+## Recommended common fits
+
+Enter the nominal diameter to get clearance or interference values for the most commonly used
+ISO fits (basic hole system H).
+
+<div class="tol-controls">
+  <div class="tol-field">
+    <label for="fit-diam">Nominal Ø (mm)</label>
+    <input type="number" id="fit-diam" min="1" max="500" step="0.01" placeholder="e.g. 25" />
+  </div>
+  <button class="tol-btn" id="fit-calc-btn">Calculate</button>
+</div>
+
+<div id="fit-output"></div>
+
+</div>
+
+</div>
+
+<script is:inline src="/tools/tolerances-iso.js"></script>
+
+## How to read the table
+
+- **es / ei**: upper and lower deviations of the shaft (in µm, algebraic).  
+  *Max shaft Ø = nominal Ø + es/1000 ; Min shaft Ø = nominal Ø + ei/1000.*
+- **EI / ES**: lower and upper deviations of the hole (in µm, algebraic).  
+  *Min hole Ø = nominal Ø + EI/1000 ; Max hole Ø = nominal Ø + ES/1000.*
+- **IT**: tolerance value (IT = es − ei = ES − EI), in µm.
+- **Max clearance** = ES hole − ei shaft ; **Min clearance** = EI hole − es shaft.  
+  A negative min clearance means **guaranteed interference**.
+
+## ISO 286-1 key points
+
+- The tolerance zone position is defined by the **fundamental deviation** (letter):
+  lowercase for shafts (`h`, `f`, `p`…), uppercase for holes (`H`, `F`, `P`…).
+- **h / H** are the reference positions (zero deviation on the material side): shaft `h` and
+  hole `H` are the bases of the basic-shaft and basic-hole fit systems.
+- The **IT grade** defines the width of the tolerance zone: IT5 (very precise) → IT12 (coarse).
+- Values are calculated per ISO 286-1:2010 tables for diameters from 1 to 500 mm.
+
+## Common fits — quick selection guide
+
+| Fit | Typical use |
+|---|---|
+| H7/f7 | Sliding with noticeable clearance — shaft rotating in bronze bearing |
+| H7/g6 | Precision sliding — cylinder rod, drill shank |
+| H7/h6 | Zero-clearance location — removable assembly |
+| H7/k6 | Near-zero / light interference — precise, repeatable location |
+| H7/n6 | Light press fit — light press or heating required |
+| H7/p6 | Standard press fit — permanent assembly by press |
+| H7/s6 | Heavy press fit — non-demountable, drive shaft |
+| H8/f7 | Free-running — spindle, standard ball bearing |
+| H11/c11 | Free — parts in dusty environments |
+
+---
+
+Need parts machined to tight fits? [LIP Industrie Précision](https://www.lip-industrie.com/en/)
+masters precision grinding, CNC turning and coordinate measurement.
+[Request a quote](https://www.lip-industrie.com/en/).
