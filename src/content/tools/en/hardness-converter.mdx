@@ -1,0 +1,98 @@
+---
+title: "Hardness Converter HRC / HB / HV / Rm — ISO 18265"
+description: "Instantly convert a hardness value between HRC, HB, HV and tensile strength Rm, according to EN ISO 18265:2013 for unalloyed and low-alloy steels."
+pubDate: 'Oct 15 2026'
+heroImage: '../../../assets/photos/about-2421.webp'
+heroAlt: "LIP Industrie Précision office in Besançon: company logo and ISO 9001 Bureau Veritas certification"
+lang: 'en'
+---
+
+Enter a hardness value in your known scale — **HRC**, **HB** or **HV** — and instantly get the
+equivalents in the other scales plus the estimated **tensile strength Rm**, in accordance with
+**EN ISO 18265:2013** (unalloyed and low-alloy steels).
+
+<div id="hd-tool">
+
+<div class="tol-section">
+
+## Quick conversion
+
+<div class="tol-controls">
+  <div class="tol-field">
+    <label for="hd-from">Known scale</label>
+    <select id="hd-from">
+      <option value="hrc">HRC — Rockwell C</option>
+      <option value="hb">HB — Brinell</option>
+      <option value="hv">HV — Vickers</option>
+      <option value="rm">Rm — Tensile strength (MPa)</option>
+    </select>
+  </div>
+  <div class="tol-field">
+    <label for="hd-value">Value</label>
+    <input type="number" id="hd-value" min="0" step="0.5" placeholder="e.g. 58" />
+  </div>
+  <button class="tol-btn" id="hd-convert-btn">Convert</button>
+</div>
+
+<div id="hd-output"></div>
+
+</div>
+
+<div class="tol-section">
+
+## Full EN ISO 18265 table
+
+<div id="hd-table-wrapper">
+<table id="hd-table">
+  <thead><tr><th>HRC</th><th>HB</th><th>HV</th><th>Rm (MPa)</th></tr></thead>
+  <tbody id="hd-table-body"></tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+
+<script is:inline src="/tools/hardness-converter.js"></script>
+
+## When to use which scale?
+
+- **HRC (Rockwell C)**: the most common scale on engineering drawings for hardened parts. Useful range: 20–68 HRC.
+  Fast, non-destructive measurement — ideal for tool steels, case-hardened or nitrided parts.
+- **HB (Brinell)**: recommended for softer or heterogeneous materials (cast irons, annealed steels,
+  aluminium alloys). The large ball (Ø 10 mm) averages structural heterogeneities.
+- **HV (Vickers)**: universal — valid from very low to very high hardness values. Tiny indentation:
+  the only scale usable on thin surface layers (nitriding, case hardening, coatings).
+  Reference scale for thermochemical treatment standards.
+- **Rm (MPa)**: tensile strength is derived from hardness via empirical correlation (table A.1, ISO 18265).
+  Indicative value only — it does not replace a tensile test.
+
+## Conversion limitations
+
+ISO 18265 states that these correspondences are **approximate** and valid only for unalloyed and
+low-alloy steels in the quenched and tempered condition. They do not apply to:
+
+- austenitic stainless steels,
+- high-speed steels (HSS),
+- cast irons,
+- non-ferrous alloys (aluminium, copper, titanium),
+- cemented carbides.
+
+Specific tables exist for these materials (annexes B to E of the standard).
+
+## Typical values in precision machining
+
+| Material / condition | Typical HRC | Typical HB | Typical HV |
+|---|---|---|---|
+| Annealed steel (e.g. 42CrMo4 annealed) | — | 180–220 | 185–225 |
+| Quenched & tempered steel (42CrMo4 QT) | 30–38 | 285–360 | 295–370 |
+| Hardened tool steel (100Cr6) | 58–64 | — | 650–780 |
+| Nitrided steel (compound layer) | — | — | 700–1000 |
+| Case-hardened & quenched (16MnCr5) | 58–62 | — | 690–750 |
+
+---
+
+Do you have parts requiring heat treatment or hardness inspection?
+LIP Industrie Précision has a full [metrology and inspection department in Besançon](/en/articles/quality-control-metrology/)
+and works with local partners for nitriding and heat treatments.
+[Contact us](https://www.lip-industrie.com/nous-contacter/).

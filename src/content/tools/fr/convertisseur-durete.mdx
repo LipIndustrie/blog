@@ -1,0 +1,101 @@
+---
+title: "Convertisseur de dureté HRC / HB / HV / Rm — ISO 18265"
+description: "Convertissez instantanément une valeur de dureté HRC, HB ou HV en ses équivalents et en résistance à la traction Rm, selon la norme EN ISO 18265:2013."
+pubDate: 'Oct 15 2026'
+heroImage: '../../../assets/photos/about-2421.webp'
+heroAlt: "Bureau LIP Industrie Précision à Besançon : logo de l'entreprise et certification ISO 9001 Bureau Veritas"
+lang: 'fr'
+---
+
+Entrez une valeur de dureté dans l'échelle de votre choix — **HRC**, **HB** ou **HV** — et obtenez
+instantanément les équivalences dans les autres échelles ainsi que la **résistance à la traction Rm**
+estimée, conformément à la norme **EN ISO 18265:2013** (aciers non-alliés et faiblement alliés).
+
+<div id="hd-tool">
+
+<div class="tol-section">
+
+## Conversion rapide
+
+<div class="tol-controls">
+  <div class="tol-field">
+    <label for="hd-from">Échelle connue</label>
+    <select id="hd-from">
+      <option value="hrc">HRC — Rockwell C</option>
+      <option value="hb">HB — Brinell</option>
+      <option value="hv">HV — Vickers</option>
+      <option value="rm">Rm — Résistance traction (MPa)</option>
+    </select>
+  </div>
+  <div class="tol-field">
+    <label for="hd-value">Valeur</label>
+    <input type="number" id="hd-value" min="0" step="0.5" placeholder="ex. 58" />
+  </div>
+  <button class="tol-btn" id="hd-convert-btn">Convertir</button>
+</div>
+
+<div id="hd-output"></div>
+
+</div>
+
+<div class="tol-section">
+
+## Table complète EN ISO 18265
+
+| HRC | HB | HV | Rm (MPa) |
+|---|---|---|---|
+
+<div id="hd-table-wrapper">
+<table id="hd-table">
+  <thead><tr><th>HRC</th><th>HB</th><th>HV</th><th>Rm (MPa)</th></tr></thead>
+  <tbody id="hd-table-body"></tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+
+<script is:inline src="/tools/hardness-converter.js"></script>
+
+## Quand utiliser quelle échelle ?
+
+- **HRC (Rockwell C)** : la plus courante sur les plans de pièces trempées. Plage utile : 20–68 HRC.
+  Mesure rapide, non destructive, idéale pour les aciers à outil, les pièces cémentées ou nitrurées.
+- **HB (Brinell)** : recommandée pour les matériaux plus tendres ou hétérogènes (fontes, aciers recuits,
+  alliages d'aluminium). La grosse bille (Ø 10 mm) moyenne les hétérogénéités de structure.
+- **HV (Vickers)** : universelle — valable de très faibles duretés jusqu'aux plus élevées. Empreinte
+  minuscule : seule échelle utilisable sur des couches superficielles fines (nitruration, cémentation,
+  dépôts). Référence pour les normes de traitement thermochimique.
+- **Rm (MPa)** : la résistance à la traction est déduite de la dureté par corrélation empirique
+  (tableau A.1, ISO 18265). Valeur indicative uniquement — elle ne remplace pas un essai de traction.
+
+## Limites de la conversion
+
+La norme ISO 18265 précise que ces correspondances sont **approximatives** et valables uniquement
+pour les aciers non-alliés et faiblement alliés à l'état trempé-revenu. Elles ne s'appliquent pas :
+
+- aux aciers austénitiques inoxydables,
+- aux aciers rapides (HSS),
+- aux fontes,
+- aux alliages non-ferreux (aluminium, cuivre, titane),
+- aux carbures frittés.
+
+Pour ces matériaux, des tables spécifiques existent (annexes B à E de la norme).
+
+## Exemples courants en mécanique de précision
+
+| Matériau / état | HRC typique | HB typique | HV typique |
+|---|---|---|---|
+| Acier recuit (ex. 42CrMo4 recuit) | — | 180–220 | 185–225 |
+| Acier trempé-revenu (42CrMo4 T) | 30–38 | 285–360 | 295–370 |
+| Acier à outil trempé (100Cr6) | 58–64 | — | 650–780 |
+| Acier nitruré (couche de combinaison) | — | — | 700–1000 |
+| Acier cémenté-trempé (16MnCr5) | 58–62 | — | 690–750 |
+
+---
+
+Vous avez des pièces à traiter thermiquement ou à contrôler en dureté ?
+LIP Industrie Précision dispose d'un parc de [contrôle complet à Besançon](/articles/parc-controle-qualite/)
+et travaille avec des partenaires locaux pour la nitruration et les traitements thermiques.
+[Contactez-nous](https://www.lip-industrie.com/nous-contacter/).

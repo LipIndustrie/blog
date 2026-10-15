@@ -330,6 +330,79 @@ hr {
 .fit-badge--serrage { background: #fadbd8; color: #c0392b; }
 .fit-badge--indetermine { background: #fdebd0; color: #ca6f1e; }
 
+/* Convertisseur dureté */
+.hd-result-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 1rem;
+	margin: 1rem 0;
+}
+.hd-res-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 1rem 0.5rem;
+	border: 2px solid var(--accent);
+	border-radius: 8px;
+	background: rgba(0, 116, 83, 0.06);
+}
+.hd-res-label {
+	font-size: 0.8em;
+	font-weight: 700;
+	color: var(--accent);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+.hd-res-val {
+	font-size: 1.8em;
+	font-weight: 700;
+	margin-top: 0.3rem;
+	color: rgb(var(--black));
+}
+.hd-na { color: rgb(var(--gray)); font-style: italic; }
+.hd-warn {
+	color: #c0392b;
+	font-weight: 600;
+	margin: 0.5rem 0;
+}
+.hd-note {
+	font-size: 0.82em;
+	color: rgb(var(--gray));
+	margin-top: 0.5rem;
+	font-style: italic;
+}
+#hd-table-wrapper {
+	overflow-x: auto;
+	max-height: 420px;
+	overflow-y: auto;
+	border: 1px solid rgba(var(--gray-light), 50%);
+	border-radius: 6px;
+}
+#hd-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.9em;
+}
+#hd-table th {
+	background: var(--accent);
+	color: #fff;
+	padding: 0.5rem 1rem;
+	position: sticky;
+	top: 0;
+}
+#hd-table td {
+	padding: 0.3rem 1rem;
+	text-align: center;
+	border-bottom: 1px solid rgba(var(--gray-light), 30%);
+}
+#hd-table tr:nth-child(even) td {
+	background: rgba(var(--gray-light), 20%);
+}
+
+@media (max-width: 600px) {
+	.hd-result-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 480px) {
 	.tol-controls { flex-direction: column; align-items: stretch; }
 	.tol-field input[type="number"],
